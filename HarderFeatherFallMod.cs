@@ -13,7 +13,7 @@ namespace ValheimMovementMods
     {
         const string pluginGUID = "afilbert.ValheimHarderFeatherFallMod";
         const string pluginName = "Valheim - Harder Feather Fall Mod";
-        const string pluginVersion = "0.1.0";
+        const string pluginVersion = "0.1.1";
         public static ManualLogSource logger;
 
         private readonly Harmony _harmony = new Harmony(pluginGUID);
