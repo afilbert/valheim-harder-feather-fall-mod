@@ -48,7 +48,7 @@ namespace ValheimMovementMods
             AltMode = Config.Bind<bool>("Alternative Mode", "Alternative: Uses stamina to stay aloft", false, "Uses stamina to stay aloft");
             AltStamDrain = Config.Bind<int>("Alternative Mode", "Alternative: Stamina drain unit (larger drains faster)", 10, "Stamina drain unit");
             HardcoreMode = Config.Bind<bool>("Hardcore Mode", "Hardcore: Wisplight bound and uses stamina", false, "Requires Wisplight for normal use and uses stamina to stay aloft");
-            StamDrainConversion = AltStamDrain.Value / 100;
+            StamDrainConversion = AltStamDrain.Value / 100f;
         }
 
         [HarmonyPatch(typeof(Player), "SetControls")]
