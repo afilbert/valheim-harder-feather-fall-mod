@@ -44,5 +44,6 @@ Releases in github repo are packaged for Thunderstore Mod Manager.
   * Fully configurable and composable with original settings, combine to increase difficulty
   * Configure rate at which stamina drains while aloft
   * Fix potentially fatal bug that didn't fully disable damage modifiers when toggling the Enable Mod option off in midair
+  * Fix bug that could cause multiple applications of damage, one for each active status effect
 * 0.1.1 Fix Thunderstore manifest `website_url`
 * 0.1.0 Initial publication
