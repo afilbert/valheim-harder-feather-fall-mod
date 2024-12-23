@@ -1,6 +1,6 @@
 # Valheim - Harder Feather Fall Mod
 
-**_Works with Mistlands Update!_**
+**_Works with Ashlands Update!_**
 
 Have you ever thought the Feather Cape seemed too OP? Especially outside of the Mistlands biome? Me too. That's why I made this mod.
 
@@ -20,8 +20,6 @@ Users of this mod beware. This is not a QOL improvement, it seeks to reduce the 
 
 ## Config
 
-The [Official BepInEx ConfigurationManager](https://github.com/BepInEx/BepInEx.ConfigurationManager) is a required dependency.
-
 Configuration allows:
 
 * **Enable Mod**, Enable the mod, default: true
@@ -38,6 +36,8 @@ Built with [BepInEx](https://valheim.thunderstore.io/package/denikson/BepInExPac
 
 Releases in github repo are packaged for Thunderstore Mod Manager.
 
+* 0.2.2 Support The Bog Witch update
+* 0.2.1 Drop requirement for Official BepInEx ConfigurationManager from Thunderstore manifest.json to allow flexibility
 * 0.2.0 Major feature. Adds optional new game mode where Feather Fall ceases to work when stamina reaches 0%.
   * Alternative game mode means that fall speed and damage modifiers remain unchanged as long as you have available stamina
   * Deadman drop at 0% stamina while still aloft
