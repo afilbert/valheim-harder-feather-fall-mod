@@ -14,7 +14,7 @@ namespace ValheimMovementMods
     {
         const string pluginGUID = "afilbert.ValheimHarderFeatherFallMod";
         const string pluginName = "Valheim - Harder Feather Fall Mod";
-        const string pluginVersion = "0.2.0";
+        const string pluginVersion = "0.2.2";
         public static ManualLogSource logger;
         public static HarderFeatherFallMod plugin;
 
@@ -71,12 +71,9 @@ namespace ValheimMovementMods
         {
             private static void Prefix(ref float baseDamage, ref float damage, ref float ___m_fallDamageModifier)
             {
-                //logger.LogInfo($"featherfall index {FeatherFallStatusIndex} applied index {AppliedDamageIndex}");
-
                 // This bit of fun code is to track whether the caller was actually the Feather Fall Status effect
                 if (FeatherFallStatusIndex != AppliedDamageIndex)
                 {
-                    //logger.LogInfo($"rejecting AppliedDamageIndex {AppliedDamageIndex}");
                     AppliedDamageIndex++;
                     return;
                 }
@@ -86,59 +83,34 @@ namespace ValheimMovementMods
 
                 float vel = FullFallVelocity;
 
-                //float ld = damage;
-                //float lbd = baseDamage;
-                // Don't need this, it's for performance tuning and logging
-                //float finalValue = ld += lbd * ___m_fallDamageModifier;
-
-                //logger.LogInfo($"final damage before {finalValue}");
-                //logger.LogInfo($"feather fall enabled? {FeatherFallEnabled} instantaneous vel {FullFallVelocity}");
                 if (!EnableToggle.Value || !FeatherFallEnabled)
                 {
-                    //logger.LogInfo("feather fall disabled (damage)");
                     ___m_fallDamageModifier = FeatherFallEnabled ? -1 : 0;
                     return;
                 }
 
-                //logger.LogInfo($"original damage modifier {___m_fallDamageModifier} original basedamage {baseDamage} damage {damage}");
 
                 if (AltMode.Value && !HardcoreMode.Value)
                 {
                     setDamageModifier(ref damage, ref ___m_fallDamageModifier, vel);
 
-                    //ld = damage;
-                    //lbd = baseDamage;
-
-                    //float fv = ld += lbd * ___m_fallDamageModifier;
-
-                    //logger.LogInfo($"alt mode final damage {fv}");
                     return;
                 }
 
                 ___m_fallDamageModifier = -1;
                 if (!WispLightEnabled || EnableEverywhere.Value || HardcoreMode.Value)
                 {
-                    //logger.LogInfo($"setting stam-derived damage {damage} baseDamage {baseDamage} modifier {___m_fallDamageModifier}");
                     setStamDerivedDamage(ref damage, ref ___m_fallDamageModifier);
                 }
-
-                //ld = damage;
-                //lbd = baseDamage;
-
-                //finalValue = ld += lbd * ___m_fallDamageModifier;
-
-                //logger.LogInfo($"final damage after {finalValue}");
             }
 
             private static void setDamageModifier(ref float damage, ref float damageModifier, float vel)
             {
-                //logger.LogInfo($"initial vel {vel}");
                 if (StaminaPercentage == 0)
                 {
                     if (FullFallVelocity > 5.4f)
                     {
                         CapturedFallVel = Mathf.Clamp((vel * 2.9f), 0, 100);
-                        //logger.LogInfo($"captured fall vel {CapturedFallVel}");
                         damage = CapturedFallVel;
                         damageModifier = 0;
                         CapturedFallVel = 0;
@@ -195,7 +167,6 @@ namespace ValheimMovementMods
 
                 if (AltMode.Value && FeatherFallEnabled && PlayerFalling && (!WispLightEnabled || HardcoreMode.Value))
                 {
-                    //logger.LogInfo($"using stam as falling with unit {AltStamDrain.Value / 100f}");
                     __instance.UseStamina(AltStamDrain.Value / 100f);
                 }
 
@@ -219,17 +190,11 @@ namespace ValheimMovementMods
                         setVelocity(vel);
                     });
                 }
-
-                //if (vel.y < 0 && PlayerFalling)
-                //{
-                //    logger.LogInfo($"falling velocity {vel.y}");
-                //}
             }
 
             private static void setVelocity(Vector3 vel)
             {
                 FullFallVelocity = Mathf.Abs(vel.y);
-                //logger.LogInfo($"setting delayed velocity at {FullFallVelocity}");
             }
         }
 
